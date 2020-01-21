@@ -4,5 +4,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    print("Poczatek")
     start_creating()
     return "Hello World!"
