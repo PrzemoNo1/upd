@@ -1,8 +1,8 @@
 from flask import Flask
-import create
+from create import start_creating
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    start_creating()
     return "Hello World!"
-    create.start_creating()

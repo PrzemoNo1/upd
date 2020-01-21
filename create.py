@@ -5,17 +5,17 @@ from config import config_data
 def start_creating():
     # Construct connection string
     try:
-    conn = mysql.connector.connect(**config_data)
-    print("Connection established")
+        conn = mysql.connector.connect(**config_data)
+        print("Connection established")
     except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with the user name or password")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with the user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
     else:
-        print(err)
-    else:
-    cursor = conn.cursor()
+        cursor = conn.cursor()
 
     # Drop previous table of same name if one exists
     cursor.execute("DROP TABLE IF EXISTS inventory;")
