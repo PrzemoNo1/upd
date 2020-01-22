@@ -4,6 +4,7 @@ from config import config_data
 
 # Construct connection string
 def start_reading():
+    result = "Ups... Something went wrong"
     try:
         conn = mysql.connector.connect(**config_data)
         print("Connection established")
@@ -23,11 +24,16 @@ def start_reading():
         print("Read",cursor.rowcount,"row(s) of data.")
 
         # Print all rows
+        result = ''
         for row in rows:
-            print("Data row = (%s, %s, %s)" %(str(row[0]), str(row[1]), str(row[2])))
+            output = "Data row = (%s, %s, %s)" %(str(row[0]), str(row[1]), str(row[2]))
+            result += output
+            print(output)
 
         # Cleanup
         conn.commit()
         cursor.close()
         conn.close()
         print("Done.")
+
+    return result
